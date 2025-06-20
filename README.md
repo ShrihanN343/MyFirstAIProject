@@ -1,0 +1,1 @@
+This project is about training an AI model to make stock predictions using yfinance package.
