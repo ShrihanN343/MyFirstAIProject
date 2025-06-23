@@ -4,7 +4,7 @@ import os
 
 def download_price_data(ticker, start, end):
     os.makedirs("data/raw", exist_ok=True)
-    df=yf.download(ticker, start=start, end=end, auto_adjust=True, progress=False)
+    df=yf.download(ticker, start=start, end=end)
     if df.empty:
         raise ValueError(f"No data found for ticker {ticker} from {start} to {end}.")
 
