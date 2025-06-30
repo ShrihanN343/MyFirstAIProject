@@ -1,0 +1,8 @@
+---
+title: "Analysis of Machine Learning Models on Stocks"
+format: 
+    pdf:
+        code-fold: true
+author: "Shrihan Naruvadi"
+---
+### Initial Observations

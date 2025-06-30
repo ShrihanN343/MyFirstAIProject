@@ -11,6 +11,8 @@ class LSTMRegressor(nn.Module):
         self.linear=nn.Linear(hidden_size, output_size)
 
     def forward(self, x):
+        # reshape input to (bash, seq_len, input_size)
+        # x=x.unsqueeze(1)
         lstm_out, _ = self.lstm(x)
         # returns output and tuple of hidden cell states 
         last_time_step_out=lstm_out[:,-1,:]
@@ -20,11 +22,11 @@ class LSTMRegressor(nn.Module):
 class LSTMTrainer:
     # self, for any class, is an argument that references the object (instance of a class)
     # epoch = number of training cycles
-    def __init__(self, input_size, hidden_size=15, num_layers=2, output_size=1, epochs=20, batch_size=32, learning_rate=0.001):
+    def __init__(self, input_size, hidden_size=50, num_layers=2, output_size=1, epochs=20, batch_size=32, learning_rate=0.001, random_state=None):
         self.model=LSTMRegressor(input_size, hidden_size, num_layers, output_size)
         self.epochs=epochs
         self.batch_size=batch_size
-        self.criterion=nn.MSEloss # mean squared error (MSE) loss function, measures how well model predictions match true target (measures error, inaccuracy)
+        self.criterion=nn.MSELoss() # mean squared error (MSE) loss function, measures how well model predictions match true target (measures error, inaccuracy)
         self.optimizer=torch.optim.Adam(self.model.parameters(), lr=learning_rate) # optimizer adjusts model weights based on the criterion/loss function
     def fit(self, x, y):
         # convert pandas  to torch tensors (matrix w/ n number of dimensions), our challenge in ML is ensuring our dimensions align from layer to layer in a way that maximizes model accuracy
@@ -41,11 +43,11 @@ class LSTMTrainer:
                 loss=self.criterion(outputs,labels)
                 loss.backward() # calculates loss for each weight by doing back propogation
                 self.optimizer.step()
-            print(f"epoch {epoch}, loss: {loss.items():.4f}")
+            # print(f"epoch {epoch}, loss: {loss.items():.4f}")
 
-        def predict(self, x):
-            self.model.eval()
-            with torch.no_grad():
-                x_tensor=torch.tensor(x.values,dtype=torch.float32).unsqueeze(-1)
-                predictions = self.model(x_tensor)
-            return predictions.numpy().flatten()
+    def predict(self, x):
+        self.model.eval()
+        with torch.no_grad():
+            x_tensor=torch.tensor(x.values,dtype=torch.float32).unsqueeze(-1)
+            predictions = self.model(x_tensor)
+        return predictions.numpy().flatten()
