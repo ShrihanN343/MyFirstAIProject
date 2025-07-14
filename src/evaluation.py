@@ -87,4 +87,5 @@ def evaluate_models(filename):
         print(f"{model_name}: avg RMSE = {avg_RMSE:.4f}")
 
 if __name__ == "__main__":
-    evaluate_models("AAPL_2015-06-20_2025-06-20")
+    # file = input("Please enter file name")
+    evaluate_models(input("Please enter file name"))
