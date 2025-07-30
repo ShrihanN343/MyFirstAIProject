@@ -7,6 +7,7 @@ import numpy as np
 def create_features(df):
     # create time series features from a data frame of price data
     df = df.copy() # why do we need to make a copy? --> We are taking copy of df so we avoid modifying original df in the file
+    df['Close'] = pd.to_numeric(df['Close'], errors = 'coerce')
     for i in range (1,31):
         df[f'lag_{i}'] = df['Close'].shift(i) # what is meant by lag? --> creating lag features to capture auto-correlation in time series data, maps how current price changes affect changes in future for 1 month
         # helps reduce 'noise' in stock market, creates a feature that is robust to noisy data, looks at price changes from month to month

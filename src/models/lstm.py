@@ -30,8 +30,8 @@ class LSTMTrainer:
         self.optimizer=torch.optim.Adam(self.model.parameters(), lr=learning_rate) # optimizer adjusts model weights based on the criterion/loss function
     def fit(self, x, y):
         # convert pandas  to torch tensors (matrix w/ n number of dimensions), our challenge in ML is ensuring our dimensions align from layer to layer in a way that maximizes model accuracy
-        x_tensor=torch.tensor(x.values, dtype=torch.float32).unsqueeze(-1) # adds feature dimension
-        y_tensor=torch.tensor(y.values, dtype=torch.float32).unsqueeze(-1)
+        x_tensor=torch.tensor(x, dtype=torch.float32)# .unsqueeze(-1) # adds feature dimension
+        y_tensor=torch.tensor(y, dtype=torch.float32)# .unsqueeze(-1)
     
         dataset=TensorDataset(x_tensor,y_tensor)
         loader=DataLoader(dataset,batch_size=self.batch_size,shuffle=True)
@@ -48,6 +48,6 @@ class LSTMTrainer:
     def predict(self, x):
         self.model.eval()
         with torch.no_grad():
-            x_tensor=torch.tensor(x.values,dtype=torch.float32).unsqueeze(-1)
+            x_tensor=torch.tensor(x,dtype=torch.float32)# .unsqueeze(-1)
             predictions = self.model(x_tensor)
         return predictions.numpy().flatten()

@@ -19,4 +19,4 @@ def download_price_data(ticker, start, end):
     return df
 
 if __name__ == "__main__":
-    download_price_data(ticker ="AAPL",start="2015-06-20", end="2025-06-20") # downloading data
+    download_price_data(ticker ="XOM",start="2010-06-20", end="2025-06-20") # downloading data
