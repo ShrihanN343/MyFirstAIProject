@@ -1,6 +1,6 @@
 Inspiration: 
 
-I was inspred to create this project because of my passion towards the world of business and computer science. I love the problem solving aspect of programming, and I decided to combine my interests and create this project. Crerating this project helped me further my skills in programming and revealed to me how the worlds of computer science and business overlap in a real-life scenario. 
+I was inspired to create this project because of my passion towards the world of business and computer science. I love the problem solving aspect of programming, and I decided to combine my interests and create this project. Crerating this project helped me further my skills in programming and revealed to me how the worlds of computer science and business overlap in a real-life scenario. 
 
 Project setup description: 
 
