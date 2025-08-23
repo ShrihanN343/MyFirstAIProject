@@ -1,17 +1,15 @@
 
 # Evaluating Prediction Models and their Business Impact
 
-### Summary 
+### Motivation 
 
 Since my freshmen year, I’ve been passionate about the worlds of business and computer science - a passion that stems from my love of problem-solving and deriving my own solutions. This project represents one example of how I leverage the resources available to me to enhance my programming skills while learning more about business intelligence through stock forecasting. Forecasting stock prices using sophisticated machine learning algorithms is standard practice in quantitative investing. Based on the literature (find and add citation!!!), performing stock forecasting using machine learning models significantly outperforms traditional statistical models. We observe that the LSTM (Long Short Term Memory) model outperformed the baseline and ARIMA models when tested across five distinct tickers. 
  
 
 
-### Research Question 
+### Background
 
-- **How has stock forecasting using machine learning changed the landscape of the stock market. What are the potential consequences?** (3 citations)
-
-    - Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear patterns as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance.^1 For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency.^2 There is a growing need for the adaption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities.^3
+- Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear patterns as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance.^1 For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency.^2 There is a growing need for the adaption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities.^3
 
 ### Dependencies
 
