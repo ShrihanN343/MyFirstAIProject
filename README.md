@@ -9,7 +9,7 @@ Since my freshmen year, I’ve been passionate about the worlds of business and 
 
 ### Background
 
-Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear patterns as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance.^1 For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency.^2 There is a growing need for the adaption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities.^3
+Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear patterns as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance.^1 For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency.^5 There is a growing need for the adaption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities.^3
 
 ### Dependencies
 
@@ -27,7 +27,7 @@ Our experiment utilized the following Python packages:
 
 ## Data Ingestion and Preprocessing
 
-We source all of our data from yfinance python package, an open source python package with the latest market data. The program checks for empty datasets and invalid tickers. We sample stock data of five different stocks between the years 2010 and 2025. The data was ingested as a Pandas dataframe, then export as a csv file with labelled columns. The preprocessing phase ensures that the model will be able to analyze and work with clean data. We make our repository open to the public, allowing anyone to replicate our results. 
+We source all of our data from the yfinance Python package, an open source Python package with the latest market data. The program checks for empty datasets and invalid tickers. We sample stock data of five different stocks between the years 2010 and 2025. The data was ingested as a Pandas dataframe, then export as a csv file with labelled columns. The preprocessing phase ensures that the model will be able to analyze and work with clean data. We make our repository open to the public, allowing anyone to replicate our results. 
 
 In order to enable effective data analysis, machine learning algorithms utilize data normalization, which is the process of compressing data into values between 0 and 1. This compression causes all data points to be relative to one another, a crucial tenet for data analysis. 
 
@@ -124,7 +124,7 @@ Mr. Zach + citations (at least 10)
 
 4. Analytics Vidhya citation here***
 
-5. 
+5. Full stack black box
 
 
 
