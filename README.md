@@ -9,7 +9,7 @@ Since my freshmen year, I’ve been passionate about the worlds of business and 
 
 ### Background
 
-Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear patterns as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance.^1 For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency.^5 There is a growing need for the adaption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities.^3
+Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear feature associations as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance.^1 For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency.^5 There is a growing need for the adaption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities.^3
 
 ### Dependencies
 
@@ -44,13 +44,13 @@ In machine learning, training a model requires us to work with finite data. In d
 
 ## Model Architecture
 
-The LSTM (Long Short Term Model) is a type of stock predicting algorithm that is able to make feature associations across long sequences of time series data.  LSTM is a type of RNN (recurrent neural network) structure. RNNs are a form of feedforward networks which were designed with sequential data in mind. RNN structures’ “hidden state” enables them to remember specific info about a sequence. RNNs can also simultaneously update their internal memory as they process new data, allowing them to adapt patterns within a sequence.^4 This model was preferred in stock prediction for a period of time, but has since been replaced with more accurate and complex models. 
+The LSTM (Long Short Term Model) is a type of stock predicting algorithm that is able to make feature associations across long sequences of time series data.  LSTM is a type of RNN (recurrent neural network) structure. RNNs are a form of feedforward networks which were designed with sequential data in mind. RNN structures’ “hidden state” enables them to remember specific feature associations within a sequence. RNNs update their internal memory as they process new data, allowing them to adapt feature associations within a sequence.^4 This model was preferred in stock prediction for a period of time, but has since been replaced with more accurate and complex models. 
 
 
 ## Model Training
 
 
-The model analyzes and learns patterns in the features from the training subset and : training, which the model analyzes and learns from, and testing, which the model's performance is evaluated against.
+The model analyzes and learns feature associations in the features from the training subset and : training, which the model analyzes and learns from, and testing, which the model's performance is evaluated against.
 
 Strengths: statistical foundation (auto regression/moving avg), interpretability, effectiveness on linear trends
 
@@ -62,7 +62,7 @@ Weaknesses: Assumption of linearity (tries to draw straight lines through comple
 
     - IS STRENGHTS AND WEAKNESSES FOR BASELINE OR CLASSICAL??
 
-- LSTM Network: What makes the LSTM model "standard"? Think about its core capability: memory. How does an LSTM's ability to "remember" long-term patterns in the data make it theoretically better suited for complex systems like stock markets compared to ARIMA?
+- LSTM Network: What makes the LSTM model "standard"? Think about its core capability: memory. How does an LSTM's ability to "remember" long-term feature associations in the data make it theoretically better suited for complex systems like stock markets compared to ARIMA?
     - LSTM is a type of a recurrent neural network and it has an internal structure called the memory cell. This cell structure allows the network to learn over time what information is important to keep versus what important is irrelevant to forget. 
 
 ### Results
