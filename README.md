@@ -11,11 +11,11 @@ Since my freshmen year, I’ve been passionate about the worlds of business and 
 
 - **How has stock forecasting using machine learning changed the landscape of the stock market. What are the potential consequences?** (3 citations)
 
-    - Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear patterns as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance. For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency. There is a growing need for the adaption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities. 
+    - Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear patterns as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance.^1 For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency.^2 There is a growing need for the adaption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities.^3
 
-### Methodology
+### Dependencies
 
-Our experiment utilized the following Python packages(list all python packages): 
+Our experiment utilized the following Python packages: 
 
 - yfinance 
 - Numpy
@@ -27,24 +27,32 @@ Our experiment utilized the following Python packages(list all python packages):
 - Pytorch
 
 
-Transparency in data sourcing is aligned with best practices, and communicates good-faith to the community. We make our repository open to the public, allowing anyone to replicate our results.
+## Data Ingestion and Preprocessing
 
-2.1. Data Ingestion and Preparation
-Brainstorming Questions:
-- Why is it important to tell your reader where the data came from and for what period? How does this build credibility?
-    - Transparency in data sourcing is aligned with best practices, and communicates good-faith to the community. We make our repository open to the public, allowing anyone to replicate our results.
-- How would you explain "normalization" to someone non-technical? Think of an analogy. Why was this step a necessary choice for your LSTM model specifically, but perhaps less so for the others?
-    - Compressing the data between a range of 0.0 and 1.0, where 0.0 is closely associated with the lowest value data point and 1.0 is closely associated with the highest value data point. Once compressed, the data is all relative to another, and it can be further analyzed with machine learning algorithms and statistical analysis. 
+- We source all of our data from yfinance python package, an open source python package with the latest market data. The program checks for empty datasets and invalid tickers. We sample stock data of five different stocks between the years 2010 and 2025. The data was ingested as a Pandas dataframe, then export as a csv file with labelled columns. The preprocessing phase ensures that the model will be able to analyze and work with clean data. We make our repository open to the public, allowing anyone to replicate our results. 
 
-- For the purposes of gathering historical stock performance data, the yfinance python library was utilized. The program checks for empty datasets and invalid tickers. After cleaning, the data is saved to a csv file in a directory (data/raw/) with a specified structure. The processing of the data ensures that the model will be able to analyze and work with the data provided and that unnecessary or unclean data is removed or cleaned. 
+- In order to enable effective data analysis, machine learning algorithms utilize data normalization, which is the process of compressing data into values between 0 and 1. This compression causes all data points to be relative to one another, a crucial tenet for data analysis. 
 
 
-2.2. Model Architectures
-Brainstorming Questions:
-- Baseline Model: How would you describe the purpose of a "control group" in an experiment? Think of the baseline model as your scientific control. Why is it crucial to prove your advanced model is better than this very simple "reality check"?
-    - The baseline model serves as a control group when evaluating the performance of the LSTM model. The control group in any experiment is supposed to represent a group that receives no experimental treatment and serves as a constant baseline to compare findings with. The baseline model in the project returns the Naive Last Value, or the stock’s last closing price. This standard behavior can then be used to compare the performance of LSTM and the classical model. 
-- Classical Model (ARIMA): How can you position the ARIMA model as the "industry standard" or the "traditional approach" that you are challenging? What are its conceptual strengths (e.g., statistical foundation) and potential weaknesses (e.g., assumptions about data)?
-    - Before the rise of machine learning, models like ARIMA were the industry standard for time series analysis. Built on well understood mathematical principles, no black box. However, it struggles to learn complex data. ADD TO THIS ANSWER USING STRENGTHS AND WEAKNESSES 
+## Feature Engineering
+
+- We create a time series feature from a dataframe of price data to generalize both short and long term trends. We engineer standard metrics used by financial professionals for technical analysis.(add citation here) These metrics include three Simple Moving Averages (SMA) which provide an unweighted mean over five, ten, and twenty days respectively. The next metric we leverage is the Exponential Moving Average (EMA), which gives more weight to recent prices making it more responsive to new information, also over five, ten, and twenty days respectively. The last metric we invoke is Volatility, which measures the standard deviation of daily log returns, helping the model understand periods of high and low price fluctuation within the past twenty days.
+
+
+## Splitting Data
+
+- In machine learning, training a model requires us to work with finite data. In doing so, we must decide how best to split the data. Before training a model, the processed dataset must be split into training and testing subsets. We select a 70/30 split of training and testing data respectively. 
+
+
+## Model Architecture
+
+- The LSTM (Long Short Term Model) is a type of stock predicting algorithm that is able to make feature associations across long sequences of time series data.  LSTM is a type of RNN (recurrent neural network) structure. RNNs are formed from feedforward networks (anticipation of sequential data is a specific strength). RNN structures’ “hidden state” enables them to remember specific info about a sequence. RNNs can also simultaneously update their internal memory as they process new data, allowing them to adapt patterns within a sequence.^4 This model was preferred in stock prediction for a period of time, but has since been replaced with more accurate and complex models. 
+
+
+## Model Training
+
+
+The model analyzes and learns patterns in the features from the training subset and : training, which the model analyzes and learns from, and testing, which the model's performance is evaluated against.
 
 Strengths: statistical foundation (auto regression/moving avg), interpretability, effectiveness on linear trends
 
@@ -108,14 +116,17 @@ State your main, conclusive finding. End on a confident note about the value and
 
 Mr. Zach + citations (at least 10)
 
-Research Question Citations: 
+### Citations: 
 
-- Saberironaghi, Mohammadreza, Jing Ren, and Alireza Saberironaghi. “Stock Market Prediction Using Machine Learning and Deep Learning Techniques: A Review.” AppliedMath, vol. 5, no. 3, 2025, p. 76. MDPI
+1. Saberironaghi, Mohammadreza, Jing Ren, and Alireza Saberironaghi. “Stock Market Prediction Using Machine Learning and Deep Learning Techniques: A Review.” AppliedMath, vol. 5, no. 3, 2025, p. 76. MDPI
 
-- El Hajj, M., & Hammoud, J. “Unveiling the Influence of Artificial Intelligence and Machine Learning on Financial Markets.” Journal of Risk and Financial Management, vol. 16, no. 10, MDPI, 2023.
+2. El Hajj, M., & Hammoud, J. “Unveiling the Influence of Artificial Intelligence and Machine Learning on Financial Markets.” Journal of Risk and Financial Management, vol. 16, no. 10, MDPI, 2023.
 
-- International Organization of Securities Commissions (IOSCO). Artificial Intelligence in Capital Markets: Use Cases, Risks, and Challenges. IOSCO Consultation Report CR/01/2025, Mar. 2025, IOSCO.
+3. International Organization of Securities Commissions (IOSCO). Artificial Intelligence in Capital Markets: Use Cases, Risks, and Challenges. IOSCO Consultation Report CR/01/2025, Mar. 2025, IOSCO.
 
+4. Analytics Vidhya citation here***
+
+5. 
 
 
 

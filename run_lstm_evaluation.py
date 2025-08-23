@@ -8,7 +8,7 @@ from src.feature_engineering import create_features
 from src.data_processing import split_data, create_sequences
 from src.models.lstm import LSTMTrainer
 
-def run_lstm_evaluation(filename, sequence_length: int = 90, test_size: float = 0.2):
+def run_lstm_evaluation(filename, sequence_length: int = 90, test_size: float = 0.3):
     try:
         df_raw = pd.read_csv(f'data/raw/{filename}.csv', index_col = 'Date', parse_dates = True)
     
