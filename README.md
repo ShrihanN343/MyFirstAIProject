@@ -27,14 +27,14 @@ Our experiment utilized the following Python packages:
 
 ## Data Ingestion and Preprocessing
 
-We source all of our data from the yfinance Python package, an open source Python package with the latest market data. The program checks for empty datasets and invalid tickers. We sample stock data of five different stocks between the years 2010 and 2025. The data was ingested as a Pandas dataframe, then export as a csv file with labelled columns. The preprocessing phase ensures that the model will be able to analyze and work with clean data. We make our repository open to the public, allowing anyone to replicate our results. 
+We source all of our data from the yfinance Python package, an open source Python package with the latest market data. The program checks for empty datasets and invalid tickers. We sample stock data of five different stocks between the years 2010 and 2025. The data was ingested as a Pandas dataframe, then exported as a csv file with labelled columns. The preprocessing phase ensures that the model will be able to analyze and work with clean data. We make our repository open to the public, allowing anyone to replicate our results. 
 
 In order to enable effective data analysis, machine learning algorithms utilize data normalization, which is the process of compressing data into values between 0 and 1. This compression causes all data points to be relative to one another, a crucial tenet for data analysis. 
 
 
 ## Feature Engineering
 
-We create a time series feature from a dataframe of price data to generalize both short and long term trends. We engineer standard metrics used by financial professionals for technical analysis.(add citation here) These metrics include three Simple Moving Averages (SMA) which provide an unweighted mean over five, ten, and twenty days respectively. The next metric we leverage is the Exponential Moving Average (EMA), which gives more weight to recent prices making it more responsive to new information, also over five, ten, and twenty days respectively. The last metric we invoke is Volatility, which measures the standard deviation of daily log returns, helping the model understand periods of high and low price fluctuation within the past twenty days.
+We create time series features from a dataframe of price data to generalize both short and long term trends. We engineer standard metrics used by financial professionals for technical analysis.(add citation here) These metrics include three Simple Moving Averages (SMA) which provide an unweighted mean over five, ten, and twenty days respectively. The next metric we leverage is the Exponential Moving Average (EMA), which gives more weight to recent prices making it more responsive to new information, also over five, ten, and twenty days respectively. The last metric we invoke is Volatility, which measures the standard deviation of daily log returns, helping the model understand periods of high and low price fluctuation within the past twenty days.
 
 
 ## Splitting Data
@@ -44,7 +44,7 @@ In machine learning, training a model requires us to work with finite data. In d
 
 ## Model Architecture
 
-The LSTM (Long Short Term Model) is a type of stock predicting algorithm that is able to make feature associations across long sequences of time series data.  LSTM is a type of RNN (recurrent neural network) structure. RNNs are formed from feedforward networks (anticipation of sequential data is a specific strength). RNN structures’ “hidden state” enables them to remember specific info about a sequence. RNNs can also simultaneously update their internal memory as they process new data, allowing them to adapt patterns within a sequence.^4 This model was preferred in stock prediction for a period of time, but has since been replaced with more accurate and complex models. 
+The LSTM (Long Short Term Model) is a type of stock predicting algorithm that is able to make feature associations across long sequences of time series data.  LSTM is a type of RNN (recurrent neural network) structure. RNNs are a form of feedforward networks which were designed with sequential data in mind. RNN structures’ “hidden state” enables them to remember specific info about a sequence. RNNs can also simultaneously update their internal memory as they process new data, allowing them to adapt patterns within a sequence.^4 This model was preferred in stock prediction for a period of time, but has since been replaced with more accurate and complex models. 
 
 
 ## Model Training
