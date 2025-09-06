@@ -23,6 +23,8 @@ Deep learning models are able to outperform traditional methods of statistical a
 
 - **Recurrent Neural Networks** refers to a recurrent form of feedforward neural networks.
 
+- **Overfitting** refers to accuracy degradation due to a model being overly trained on the training dataset. 
+
 ### Dependencies
 
 Our experiment utilized the following Python packages: 
@@ -51,7 +53,7 @@ We create time series features from a dataframe of price data to generalize both
 
 ## Splitting Data
 
-In machine learning, training a model requires us to work with finite data. In doing so, we must decide how best to split the data. Before training a model, the processed dataset must be split into training and testing subsets. We selected a 70/30 split of training and testing data respectively. 
+In machine learning, training a model requires us to work with finite data. In doing so, we must decide how best to split the data. Before training a model, the processed dataset must be split into training and testing subsets. We selected a 70/30 split of training and testing data respectively. This helps prevent the model from overfitting to the training data set. 
 
 
 ## Model Architecture
