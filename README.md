@@ -3,13 +3,25 @@
 
 ### Motivation 
 
-Since my freshmen year, I’ve been passionate about the worlds of business and computer science - a passion that stems from my love of problem-solving and deriving my own solutions. This project represents one example of how I leverage the resources available to me to enhance my programming skills while learning more about business intelligence through stock forecasting. Forecasting stock prices using sophisticated machine learning algorithms is standard practice in quantitative investing. Based on the literature (find and add citation!!!), performing stock forecasting using machine learning models significantly outperforms traditional statistical models. We observe that the LSTM (Long Short Term Memory) model outperformed the baseline and ARIMA models when tested across five distinct tickers. 
+Since my freshman year, I’ve been passionate about the worlds of business and computer science - a passion that stems from my love of problem-solving and deriving my own solutions. This project represents one example of how I leverage the resources available to me to enhance my programming skills while learning more about business intelligence through stock forecasting. I set out to better understand how to leverage machine learning in predictive analytics, starting with exploring the differences between machine learning models and traditional statistical methods of predictive analytics as it pertains to stock forecasting. Forecasting stock prices using sophisticated machine learning algorithms is standard practice in quantitative investing. Based on the literature, performing stock forecasting using machine learning models significantly outperforms traditional statistical models.[6] We observe that the LSTM (Long Short Term Memory) model outperformed the baseline and ARIMA models when tested across five distinct tickers. 
  
-
 
 ### Background
 
-Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear feature associations as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance.^1 For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency.^5 There is a growing need for the adaption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities.^3
+Deep learning models are able to outperform traditional methods of statistical analysis in capturing non-linear feature associations as well as volatility. However, there continue to exist challenges with AI in financial markets such as data privacy, ethical concerns, and regulatory compliance.[1] For example, due to AI's black box nature, regulators may find it difficult to defend decisions, and this raises concerns about transparency.[5] There is a growing need for the adoption of AI skills in financial professions, as well as upgrades to infrastructure in order to integrate new technologies to take full advantage of opportunities.[3]
+
+
+### Definitions
+
+- **Feature Associations** refers to patterns learned by the model from the dataset.
+
+- **Root-Mean Squared Error** (RMSE) refers to the average difference in predicted price versus observed price stock predicting algorithm makes when forecasting a stock price. Lower RMSE scores translate to more accurate predictions. 
+
+- **Deep learning refers to 
+
+- AI black box refers to 
+
+- Recurrent neural network refers to a recurrent form of feedforward neural networks.
 
 ### Dependencies
 
@@ -27,92 +39,72 @@ Our experiment utilized the following Python packages:
 
 ## Data Ingestion and Preprocessing
 
-We source all of our data from the yfinance Python package, an open source Python package with the latest market data. The program checks for empty datasets and invalid tickers. We sample stock data of five different stocks between the years 2010 and 2025. The data was ingested as a Pandas dataframe, then exported as a csv file with labelled columns. The preprocessing phase ensures that the model will be able to analyze and work with clean data. We make our repository open to the public, allowing anyone to replicate our results. 
+We source all of our data from the yfinance Python package, an open source Python package with the latest market data. The program checks for empty datasets and invalid tickers. We sample ticker data of five different stocks between the years 2010 and 2025. The data was ingested as a Pandas dataframe, then exported as a csv file with labelled columns. The preprocessing phase ensures that the model will be able to analyze and work with clean data. We make our repository open to the public, allowing anyone to replicate our results. 
 
 In order to enable effective data analysis, machine learning algorithms utilize data normalization, which is the process of compressing data into values between 0 and 1. This compression causes all data points to be relative to one another, a crucial tenet for data analysis. 
 
 
 ## Feature Engineering
 
-We create time series features from a dataframe of price data to generalize both short and long term trends. We engineer standard metrics used by financial professionals for technical analysis.(add citation here) These metrics include three Simple Moving Averages (SMA) which provide an unweighted mean over five, ten, and twenty days respectively. The next metric we leverage is the Exponential Moving Average (EMA), which gives more weight to recent prices making it more responsive to new information, also over five, ten, and twenty days respectively. The last metric we invoke is Volatility, which measures the standard deviation of daily log returns, helping the model understand periods of high and low price fluctuation within the past twenty days.
+We create time series features from a dataframe of price data to generalize both short and long term trends. We engineer standard metrics used by financial professionals for technical analysis.[7] These metrics include three Simple Moving Averages (SMA) which provide an unweighted mean over five, ten, and twenty days respectively. The next metric we leverage is the Exponential Moving Average (EMA), which gives more weight to recent prices making it more responsive to new information, also over five, ten, and twenty days respectively. The last metric we invoke is Volatility, which measures the standard deviation of daily log returns, helping the model understand periods of high and low price fluctuation within the past twenty days.
 
 
 ## Splitting Data
 
-In machine learning, training a model requires us to work with finite data. In doing so, we must decide how best to split the data. Before training a model, the processed dataset must be split into training and testing subsets. We select a 70/30 split of training and testing data respectively. 
+In machine learning, training a model requires us to work with finite data. In doing so, we must decide how best to split the data. Before training a model, the processed dataset must be split into training and testing subsets. We selected a 70/30 split of training and testing data respectively. 
 
 
 ## Model Architecture
 
-The LSTM (Long Short Term Model) is a type of stock predicting algorithm that is able to make feature associations across long sequences of time series data.  LSTM is a type of RNN (recurrent neural network) structure. RNNs are a form of feedforward networks which were designed with sequential data in mind. RNN structures’ “hidden state” enables them to remember specific feature associations within a sequence. RNNs update their internal memory as they process new data, allowing them to adapt feature associations within a sequence.^4 This model was preferred in stock prediction for a period of time, but has since been replaced with more accurate and complex models. 
+The Long-Short Term Memory (LSTM) model is a type of machine learning model that is able to make feature associations across long sequences of time series data. The LSTM model is a type of a recurrent neural network (RNN) which has an internal memory cell structure. This cell contains a "hidden state", which captures feature associations within a sequence. The cell is able to prioritize what feature associations are most closely correlated with changes in the label (price) data. LSTMs update their internal memory as they process new data, allowing them to adapt feature associations within a sequence.[4] This model was preferred in stock prediction for a period of time, but has since been replaced with more accurate and complex models. 
 
 
 ## Model Training
 
+The model analyzes and learns feature associations derived from standard metrics used by financial professionals. LSTM models specialize in capturing linear trends, which have been approximated based on the non-linear features from our training subset. The following parameters were used to train the model: 
 
-The model analyzes and learns feature associations in the features from the training subset and : training, which the model analyzes and learns from, and testing, which the model's performance is evaluated against.
+```python
+# training lstm model
+    lstm_trainer = LSTMTrainer(
+        input_size = 1, 
+        hidden_size = 50, 
+        num_layers = 2,
+        output_size = 1,
+        epochs = 25,
+        batch_size = 32, 
+        learning_rate = 0.01,
+        random_state = 42
+    )
+```
 
-Strengths: statistical foundation (auto regression/moving avg), interpretability, effectiveness on linear trends
-
-- The baseline model has a variety of strenghts, such as its effectiveness on linear trends, a string statistical foundation, and its interpretability. 
-
-Weaknesses: Assumption of linearity (tries to draw straight lines through complex data), stationarity requirement (its statistical properties like mean and variance are constant over time), struggles with complexity
-
-- However, the baseline model also has several drawbacks. The model struggles with complexity and assumes linearity through non-linear data. Another drawback to be noted is its stationarity requirements. 
-
-    - IS STRENGHTS AND WEAKNESSES FOR BASELINE OR CLASSICAL??
-
-- LSTM Network: What makes the LSTM model "standard"? Think about its core capability: memory. How does an LSTM's ability to "remember" long-term feature associations in the data make it theoretically better suited for complex systems like stock markets compared to ARIMA?
-    - LSTM is a type of a recurrent neural network and it has an internal structure called the memory cell. This cell structure allows the network to learn over time what information is important to keep versus what important is irrelevant to forget. 
 
 ### Results
 
-3.1. Quantitative Comparison
-Action: Run the evaluation scripts for all models to populate the RMSE table.
-Brainstorming Questions:
-- Before you write, just look at the completed table. What is the most obvious story the numbers are telling? Is there a clear winner? Are there any results that surprise you? 
-    - The numbers point to the LSTM being the most accurate model of the three due to it consistently having the lowest RMSE across all tickers. I was surprised to see that despite the differences in the baseline and ARIMA models’ performances, they performed very close when predicting AMZN. In analyzing other tickers, however, the difference was sharp. For example, the ARIMA model had an RMSE of approximately 63 while the baseline model’s RMSE was around 24 for the ticker MSFT. 
-- How can you introduce this table to the reader? Frame it as the primary evidence from your comparative study.
-    - This table provides us with statistical data that compares the performances of all three models across five different ticker symbols of companies that are in a variety of sectors. Each model scores an RMSE value for each ticker. RMSE (root-mean squared error) refers to the average difference in predicted price versus observed price that the stock predicting algorithm makes when forecasting a stock price. The lower the RMSE, the better the model, and the more accurate the forecast.     
-
 | Stock Ticker | Baseline RMSE | ARIMA RMSE | LSTM RMSE |
 |--------------|---------------|------------|-----------|
-| AAPL         | 13.6648       | 29.4999    | 4.8387    |
-| AMZN         | 14.1469       | 14.5540    | 3.7320    |
-| MSFT         | 24.2329       | 62.6977    | 12.3385   |
-| UNH          | 46.1457       | 25.1849    | 15.6239   |
-| XOM          | 6.5515        | 14.4534    | 2.4972    |
+| AAPL         | 13.6648       | 29.4999    | 7.6253    |
+| AMZN         | 14.1469       | 14.5540    | 4.1601    |
+| MSFT         | 24.2329       | 62.6977    | 16.8311   |
+| UNH          | 46.1457       | 25.1849    | 25.2305   |
+| XOM          | 6.5515        | 14.4534    | 5.3857    |
+- **Fig. 1:** This table provides us with statistical data comparing the performances of all three models across five stock tickers in a variety of sectors. Each model scores an RMSE value for each ticker.
 
-3.2. Interpretation of Results
-Brainstorming Questions:
-- Tell the Main Story: What's the headline? Start with the main conclusion from the table. Which model was generally the most accurate?
-    - The LSTM model was the most accurate model across all stocks tested. The baseline model was the second most accurate in predicting all stock values except for UNH. The ARIMA model had the worst overall performance relative to the LSTM and baseline models. 
-- Make it Tangible: Pick one stock (e.g., Apple). What does its RMSE number (4.8387) actually mean in plain English? 
-    - RMSE (root-mean squared error) refers to the average difference in predicted price versus observed price that the stock predicting algorithm makes when forecasting a stock price. The lower the RMSE, the better the model, and the more accurate the forecast. 
-- Go Beyond the Numbers: Now look at the graphs in your images/ folder. What do the visuals show you that the RMSE numbers alone don't? Do the models behave differently during periods of stability versus periods of high volatility? Does one model capture turning points better than another? This is where you can show deep analytical insight.
-    - The LSTM model most accurately predicts shifting market trends and turning points in prices out of all three models. The classical model assumes a “price wall” when predicting prices of a stock has reached a relative maximum in the analyzed time period. 
+The LSTM model accurately predicts shifting market trends and turning points in prices when markets are stable. However, when volatility metrics rise beyond some threshold, we see a collapse of prediction accuracy relative to the models tested. This is evident by the marginally worse performance of the LSTM model relative to classical methods on the UNH stock ticker. The Baseline model uses a naive approach that assumes the price will remain the same in 30 days. 
+
 
 ### Business Implications
 
-Brainstorming Questions:
-- Think like a consultant. If a company could use your tool, how would it change their business? Move beyond "predicting prices." Could it be used for risk management? Could it help an analyst check their own biases? Could it automatically flag stocks that are behaving unusually?
-    - Beyond predicting stock prices, machine learning algorithms can also be used to track a business’ inventory and supply chain. Expanding on the Covid-19 example from earlier in the document, an ML application could forecast rising demands for certain goods in times of international emergencies and provide businesses with crucial time to react and be prepared to meet these demands. An ML algorithm can be trained to optimize for a function of social good like reducing scarcity in essential supplies such as toilet paper and cleaning supplies, which were goods affected by scarcity during Covid-19. 
-Future Work
-Brainstorming Questions:
-- No project is perfect. What were the limitations you observed? (e.g., the lag during volatility you saw in the charts). How could you address these limitations in a future version?
-    - Future revisions on the LSTM model would include adding hyperparameters to the model to enable more accurate predictions.
-- What's the next logical step to make this tool even more powerful? Think about adding more data (like news sentiment), improving the model architecture, or changing the prediction goal (e.g., predicting volatility instead of price).
+Beyond predicting stock prices, machine learning algorithms can also be used to track business inventory and supply chains. During future pandemics,  machine learning models could forecast rising demands for certain goods in times of international emergencies and provide businesses with crucial information to react and be prepared to meet these demands. A machine learning algorithm can be trained to optimize for a function of social good like reducing scarcity in essential supplies such as toilet paper and cleaning supplies, which were goods affected by scarcity during the Covid-19 pandemic. 
 
-### Conclusion
 
-Guidance: A strong conclusion briefly mirrors the introduction.
-Restate the core problem you set out to solve.
-Briefly summarize the approach you took (your comparative analysis).
-State your main, conclusive finding. End on a confident note about the value and potential of your work.
+### Findings
+
+The most unexpected finding of this research was the inconsistency in RMSE values for the UNH ticker across all three models tested. This anomaly in our findings is directly attributed to an extreme price drop in the testing dataset. Across the 4 other tickers, the LSTM model outperformed the Baseline and ARIMA models. In my research, I found that machine learning algorithms are able to capture a richness of feature associations attributable to changes in the label (price) data that traditional statistical methods are not. The LSTM model we tested demonstrated the lowest RMSE value across 4 of the 5 tickers analyzed. The LSTM model's success can be attributed to the memory cell's ability to capture the feature associations most closely correlated with changes in the price.
+
 
 ### Acknowledgements
 
-Mr. Zach + citations (at least 10)
+**Zachariah Rodriguez-Mcdonough**: https://www.linkedin.com/in/zachariah-rodriguez-mcdonough-597b7b119  
 
 ### Citations: 
 
@@ -122,14 +114,10 @@ Mr. Zach + citations (at least 10)
 
 3. International Organization of Securities Commissions (IOSCO). Artificial Intelligence in Capital Markets: Use Cases, Risks, and Challenges. IOSCO Consultation Report CR/01/2025, Mar. 2025, IOSCO.
 
-4. Analytics Vidhya citation here***
+4. Siddharth M. “Stock Price Prediction Using LSTM and Its Implementation.” Analytics Vidhya, 1 May 2025, analyticsvidhya.com/blog/2021/12/stock-price-prediction-using-lstm/.
 
-5. Full stack black box
+5. FullStack Team. “How Machine Learning Is Transforming Predictive Analytics.” FullStack Blog, last updated 30 June 2025, fullstack.com/labs/resources/blog/how-machine-learning-is-revolutionizing-predictive-analytics?utm_source=chatgpt.com. Accessed 30 Aug. 2025.
 
+6. FasterCapital. “AI vs Traditional Forecasting Models—Which Is Superior.” FasterCapital, [date not specified], https://fastercapital.com/articles/AI-vs-traditional-forecasting-models--Which-is-superior.html?utm_source=chatgpt.com#toc-1-4-raditional-vs-orecasting-ey-onsiderations.
 
-
-
-USE THIS SOMEWHERE
-
-Machine learning algorithms can also make predictions on variables that help increase business profits or reduce business expenses. The Covid-19 pandemic highlighted the fragility of domestic supply chains, which could have been mitigated through predictive models of inventory management.
-
+7. Tradelink.pro. “Key Technical Analysis Indicators: SMA, EMA, and Bollinger Bands.” Tradelink.pro, n.d., tradelink.pro/blog/sma-ema-bollinger-bands-indicators/. 

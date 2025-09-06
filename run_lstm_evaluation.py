@@ -39,12 +39,12 @@ def run_lstm_evaluation(filename, sequence_length: int = 90, test_size: float = 
     # training lstm model
     lstm_trainer = LSTMTrainer(
         input_size = 1, 
-        hidden_size = 50, 
-        num_layers = 2,
-        output_size = 1,
-        epochs = 25,
+        hidden_size = 50, # number of neurons per layer
+        num_layers = 2, # number of layers
+        output_size = 1, 
+        epochs = 100, # number of training cycles
         batch_size = 32, 
-        learning_rate = 0.01,
+        learning_rate = 0.001, # This is the `alpha`, which tells the model how much to change based on 
         random_state = 42
     )
     lstm_trainer.fit(x_train, y_train)
