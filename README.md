@@ -17,11 +17,11 @@ Deep learning models are able to outperform traditional methods of statistical a
 
 - **Root-Mean Squared Error** (RMSE) refers to the average difference in predicted price versus observed price stock predicting algorithm makes when forecasting a stock price. Lower RMSE scores translate to more accurate predictions. 
 
-- **Deep learning refers to 
+- **Deep Learning** refers to a subfield of machine learning that uses multi-layered neural networks to extract complex patterns and features from big data. 
 
-- AI black box refers to 
+- **AI Black Box** refers to the lack of interpretability in complex neural networks.
 
-- Recurrent neural network refers to a recurrent form of feedforward neural networks.
+- **Recurrent Neural Networks** refers to a recurrent form of feedforward neural networks.
 
 ### Dependencies
 
